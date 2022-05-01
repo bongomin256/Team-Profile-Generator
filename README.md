@@ -46,7 +46,7 @@ Incase of any question[s] or suggestion[s] concerning this appication, please co
 ## Links
 
 - [Github repo](https://github.com/bongomin256/Team-Profile-Generator)
-- [Link to a walk through video]()
+- [Link to a walk through video](https://youtu.be/Bmp5T2YG1cg)
 
 ## Screenshots
 
