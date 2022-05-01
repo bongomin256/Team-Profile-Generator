@@ -50,5 +50,4 @@ Incase of any question[s] or suggestion[s] concerning this appication, please co
 
 ## Screenshots
 
-![screenshot](./Develop/)
-![screenshot](./Develop/)
+![screenshot](./images/screenshot.png)
