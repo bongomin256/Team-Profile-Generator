@@ -14,31 +14,38 @@ console.log(myTeam);
 const managerQuiz = [
   {
     type: "input",
-    message: "Enter your name",
+    message: "Enter the employee's name",
     name: "managerName",
     validate: (value) => {
       if (value) {
         return true;
       } else {
-        return "Please enter the project's title to continue";
+        return "Please enter a name to continue";
       }
     },
   },
   {
     type: "list",
-    message: "What is your role?",
+    message: "Select the role",
     name: "role",
     choices: ["Manager", "Engineer", "Intern"],
-  },
-  {
-    type: "input",
-    message: "Enter your Manager's ID",
-    name: "managerId",
     validate: (value) => {
       if (value) {
         return true;
       } else {
-        return "Please enter the project's title to continue";
+        return "Please select one option to continue";
+      }
+    },
+  },
+  {
+    type: "input",
+    message: "Enter employee's ID number",
+    name: "managerId",
+    validate: (num) => {
+      if (num) {
+        return true;
+      } else {
+        return "Please enter the id number to continue";
       }
     },
   },
@@ -50,7 +57,7 @@ const managerQuiz = [
       if (value) {
         return true;
       } else {
-        return "Please enter the project's title to continue";
+        return "Please enter an email address to continue";
       }
     },
   },
@@ -58,11 +65,11 @@ const managerQuiz = [
     type: "input",
     message: "Enter office number",
     name: "officeNumber",
-    validate: (value) => {
-      if (value) {
+    validate: (num) => {
+      if (num) {
         return true;
       } else {
-        return "Please enter the project's title to continue";
+        return "Please enter the a number to continue";
       }
     },
   },
@@ -80,6 +87,13 @@ const menuQuiz = [
       "Add Intern",
       "Finish Buidling my team",
     ],
+    validate: (value) => {
+      if (value) {
+        return true;
+      } else {
+        return "Please select one option to continue";
+      }
+    },
   },
 ];
 
@@ -87,29 +101,64 @@ const menuQuiz = [
 const engineerQuiz = [
   {
     type: "input",
-    message: "Enter your Engineer's name",
+    message: "Enter the Engineer's name",
     name: "engineerName",
+    validate: (value) => {
+      if (value) {
+        return true;
+      } else {
+        return "Please enter a name to continue";
+      }
+    },
   },
   {
     type: "list",
-    message: "What is your role?",
+    message: "Select the role",
     name: "role",
     choices: ["Manager", "Engineer", "Intern"],
+    validate: (value) => {
+      if (value) {
+        return true;
+      } else {
+        return "Please select an option to continue";
+      }
+    },
   },
   {
     type: "input",
     message: "Enter your Engineer's ID number",
     name: "engineerId",
+    validate: (num) => {
+      if (num) {
+        return true;
+      } else {
+        return "Please enter a number to continue";
+      }
+    },
   },
   {
     type: "input",
     message: "Enter your Employee's email address",
     name: "engineerEmail",
+    validate: (value) => {
+      if (value) {
+        return true;
+      } else {
+        return "Please enter an email address to continue";
+      }
+    },
   },
   {
     type: "input",
     message: "Enter your Engineer'S Github username",
     name: "githubUsername",
+    validate: (value) => {
+      if (value) {
+        return true;
+      } else {
+        return "Please enter Github username to continue";
+      }
+    },
   },
 ];
 
@@ -117,29 +166,64 @@ const engineerQuiz = [
 const internQuiz = [
   {
     type: "input",
-    message: "Enter your name",
+    message: "Enter Intern's name",
     name: "internName",
+    validate: (value) => {
+      if (value) {
+        return true;
+      } else {
+        return "Please enter a name to continue";
+      }
+    },
   },
   {
     type: "list",
-    message: "What is your role?",
+    message: "Select the role",
     name: "role",
     choices: ["Manager", "Engineer", "Intern"],
+    validate: (value) => {
+      if (value) {
+        return true;
+      } else {
+        return "Please select an option to continue";
+      }
+    },
   },
   {
     type: "input",
-    message: "Enter your ID number",
+    message: "Enter employee's ID number",
     name: "internId",
+    validate: (value) => {
+      if (value) {
+        return true;
+      } else {
+        return "Please enter a number to continue";
+      }
+    },
   },
   {
     type: "input",
     message: "Enter your email address",
     name: "internEmail",
+    validate: (value) => {
+      if (value) {
+        return true;
+      } else {
+        return "Please enter an email address to continue";
+      }
+    },
   },
   {
     type: "input",
-    message: "Enter your School",
+    message: "Enter the intern's School",
     name: "school",
+    validate: (value) => {
+      if (value) {
+        return true;
+      } else {
+        return "Please enter the school name to continue";
+      }
+    },
   },
 ];
 
@@ -207,7 +291,9 @@ function genIntern() {
 // Creating the index.html file and storing it in the dist directory
 function renderTeam() {
   fs.writeFile("./dist/index.html", generateHTML(myTeam), (err) => {
-    err ? console.error(err) : console.log("you have built your team!");
+    err
+      ? console.error(err)
+      : console.log("You have successfully built your team!");
   });
 }
 
