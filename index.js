@@ -135,3 +135,64 @@ const internQuiz = [
     name: "school",
   },
 ];
+
+//Manager prompt function.
+function generateMananger() {
+  return inquirer.prompt(managerQuiz).then(function (response) {
+    const manager = new Manager(
+      response.managerName,
+      response.managerId,
+      response.managerEmail,
+      response.officeNumber
+    );
+    myTeam.push(manager);
+    console.log(myTeam);
+
+    menuOption();
+  });
+}
+
+//Menu option function
+function menuOption() {
+  return inquirer.prompt(menuQuiz).then(function (response) {
+    if (response.menu === "Add Engineer") {
+      genEngineer();
+    } else if (response.menu === "Add Intern") {
+      genIntern();
+    } else {
+      renderTeam();
+    }
+  });
+}
+//Engineer prompt function
+function genEngineer() {
+  return inquirer.prompt(engineerQuiz).then((response) => {
+    const engineer = new Engineer(
+      response.engineerName,
+      response.engineerId,
+      response.engineerEmail,
+      response.githubUsername
+    );
+    myTeam.push(engineer);
+    menuOption();
+  });
+}
+
+// Intern prompt function
+function genIntern() {
+  return inquirer.prompt(internQuiz).then((response) => {
+    const intern = new Intern(
+      response.internName,
+      response.internId,
+      response.internEmail,
+      response.school
+    );
+    myTeam.push(intern);
+
+    menuOption();
+  });
+}
+
+function renderTeam() {}
+
+generateMananger();
