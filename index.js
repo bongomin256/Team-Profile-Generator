@@ -4,9 +4,11 @@ const fs = require("fs");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const generateHTML = require("./src/generateHTML");
 
 // Creating an empty arry of my team that will the employee catergories.
 const myTeam = [];
+console.log(myTeam);
 
 // Creating array of questions to generate Manager employee
 const managerQuiz = [
@@ -72,7 +74,12 @@ const menuQuiz = [
     type: "list",
     message: "Please select one of the option to continue",
     name: "menu",
-    choices: ["Add Engineer", "Add Intern", "Finish Buidling my team"],
+    choices: [
+      "Add Manager",
+      "Add Engineer",
+      "Add Intern",
+      "Finish Buidling my team",
+    ],
   },
 ];
 
@@ -90,7 +97,7 @@ const engineerQuiz = [
     choices: ["Manager", "Engineer", "Intern"],
   },
   {
-    type: "list",
+    type: "input",
     message: "Enter your Engineer's ID number",
     name: "engineerId",
   },
@@ -114,13 +121,13 @@ const internQuiz = [
     name: "internName",
   },
   {
-    type: "input",
+    type: "list",
     message: "What is your role?",
     name: "role",
     choices: ["Manager", "Engineer", "Intern"],
   },
   {
-    type: "list",
+    type: "input",
     message: "Enter your ID number",
     name: "internId",
   },
@@ -138,7 +145,7 @@ const internQuiz = [
 
 //Manager prompt function.
 function generateMananger() {
-  return inquirer.prompt(managerQuiz).then(function (response) {
+  inquirer.prompt(managerQuiz).then(function (response) {
     const manager = new Manager(
       response.managerName,
       response.managerId,
@@ -154,11 +161,13 @@ function generateMananger() {
 
 //Menu option function
 function menuOption() {
-  return inquirer.prompt(menuQuiz).then(function (response) {
+  inquirer.prompt(menuQuiz).then(function (response) {
     if (response.menu === "Add Engineer") {
       genEngineer();
     } else if (response.menu === "Add Intern") {
       genIntern();
+    } else if (response.menu === "Add Manager") {
+      generateMananger();
     } else {
       renderTeam();
     }
@@ -166,7 +175,7 @@ function menuOption() {
 }
 //Engineer prompt function
 function genEngineer() {
-  return inquirer.prompt(engineerQuiz).then((response) => {
+  inquirer.prompt(engineerQuiz).then((response) => {
     const engineer = new Engineer(
       response.engineerName,
       response.engineerId,
@@ -174,6 +183,7 @@ function genEngineer() {
       response.githubUsername
     );
     myTeam.push(engineer);
+    console.log(myTeam);
     menuOption();
   });
 }
@@ -188,11 +198,17 @@ function genIntern() {
       response.school
     );
     myTeam.push(intern);
+    console.log(myTeam);
 
     menuOption();
   });
 }
 
-function renderTeam() {}
+// Creating the index.html file and storing it in the dist directory
+function renderTeam() {
+  fs.writeFile("./dist/index.html", generateHTML(myTeam), (err) => {
+    err ? console.error(err) : console.log("you have built your team!");
+  });
+}
 
 generateMananger();
